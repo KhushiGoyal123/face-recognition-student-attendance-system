@@ -1,6 +1,6 @@
 from email import message
 from msilib.schema import Class
-from multiprocessing import parent_process
+# from multiprocessing import parent_process
 from tkinter import*
 from tkinter import ttk
 from tkinter import font
@@ -10,6 +10,10 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 from colorama import Cursor
 import mysql.connector
+import cv2
+import os
+import numpy as np
+from train import Train
 
 
 
@@ -18,6 +22,9 @@ class Student:
         self.root=root
         self.root.geometry("1530x790+0+0")
         self.root.title("Student Management System")
+        
+        
+         
         
       # ------------------variables-------------------
         self.var_dep=StringVar()
@@ -256,15 +263,31 @@ class Student:
         
         #buttons frame
         btn_frame1=Frame(Left_frame,bd=2,bg="white",relief=RIDGE)
-        btn_frame1.place(x=5,y=370,width=585,height=30)
+        btn_frame1.place(x=5,y=365,width=585,height=30)
         
         #take photo button
-        take_photo_btn=Button(btn_frame1,text="Take Photo Sample",width=32,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
+        take_photo_btn=Button(btn_frame1,text="Take Photo Sample",command=self.generate_dataset,width=32,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
         take_photo_btn.grid(row=0,column=0)
         
         #update photo button
         update_photo_btn=Button(btn_frame1,text="Update Photo Sample",width=32,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
         update_photo_btn.grid(row=0,column=1)
+        
+        
+         # training photo data sets
+        def train_data():
+            self.new_window=Toplevel(self.root)
+            self.app=Train(self.new_window)
+        
+        
+        #train frame
+        train_frame=Frame(Left_frame,bd=2,bg="white",relief=RIDGE)
+        train_frame.place(x=5,y=395,width=585,height=30)
+        
+        #train photo button
+        train_photo_btn=Button(train_frame,text="Click only after photo sample is added",command=train_data,width=70,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
+        train_photo_btn.grid(row=0,column=0)
+        
         
         
         
@@ -527,6 +550,94 @@ class Student:
               
             
         
+        
+        # ===================Generate data set or Take Photo Sample===================
+    def generate_dataset(self):
+          if self.var_dep.get()=="Select Department" or self.var_std_name.get()=="" or self.var_std_id.get()=="":
+                messagebox.showerror("Error","All Fields are required",parent=self.root)
+          else:
+                try:
+                    conn=mysql.connector.connect(
+                      host="localhost",
+                      user="root",
+                      password="#Khushi@123",
+                      database="face_recognition")
+                    my_cursor=conn.cursor()
+                    my_cursor.execute("select * from student")
+                    myresult=my_cursor.fetchall()
+                    id=0
+                    for x in myresult:
+                          id+=1
+                    my_cursor.execute("update student set Dep=%s,course=%s,Year=%s,Semester=%s,Name=%s,Division=%s,Roll=%s,Gender=%s,Dob=%s,Email=%s,Phone=%s,Address=%s,Teacher=%s,PhotoSample=%s where Student_id=%s",(
+                      
+                                                                                                                                                                                              self.var_dep.get(),
+                                                                                                                                                                                              self.var_course.get(),
+                                                                                                                                                                                              self.var_year.get(),
+                                                                                                                                                                                              self.var_semester.get(),
+                                                                                                                                                                                              self.var_std_name.get(),
+                                                                                                                                                                                              self.var_div.get(),
+                                                                                                                                                                                              self.var_roll.get(),
+                                                                                                                                                                                              self.var_gender.get(),
+                                                                                                                                                                                              self.var_dob.get(),
+                                                                                                                                                                                              self.var_email.get(),
+                                                                                                                                                                                              self.var_phone.get(),
+                                                                                                                                                                                              self.var_address.get(),
+                                                                                                                                                                                              self.var_teacher.get(),
+                                                                                                                                                                                              self.var_radio1.get(),
+                                                                                                                                                                                              self.var_std_id.get()==id+1
+                                                                                                                                                                                          ))  
+                    conn.commit()
+                    self.fetch_data()
+                    self.reset_data()
+                    conn.close() 
+                    
+                    # ==============Load pre Defined data on face frontals from opencv =======
+                    face_classifier=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+                    def face_cropped(img):
+                        gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)   
+                        faces=face_classifier.detectMultiScale(gray,1.3,5)
+                        # 1.3 - scaling factor
+                        # 5 - minimum neighbour
+                        
+                        for (x,y,w,h) in faces:
+                              face_cropped=img[y:y+h,x:x+w]
+                              return face_cropped
+                        
+                    cap=cv2.VideoCapture(0)
+                    img_id=0
+                    while True:
+                          ret,my_frame=cap.read()
+                          if face_cropped(my_frame) is not None:
+                            img_id+=1
+                            face=cv2.resize(face_cropped(my_frame),(450,450))      
+                            face1=cv2.cvtColor(face,cv2.COLOR_BGR2GRAY)
+                            file_name_path="data/user."+str(id)+"."+str(img_id)+".jpg"
+                            cv2.imwrite(file_name_path,face)
+                            cv2.putText(face,str(img_id),(50,50),cv2.FONT_HERSHEY_COMPLEX,2,(0,255,0),2)
+                            cv2.imshow("Cropped face",face1)
+
+                            if cv2.waitKey(1)==13 or int(img_id)==100:
+                              break
+                    cap.release()
+                    cv2.destroyAllWindows()
+                          
+                    messagebox.showinfo("Result","Photo Added")  
+                   
+                      
+                except Exception as es:
+                  messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)
+                                                                                                                                                                                           
+      
+   
+                    
+                    
+                    
+                    
+                    
+                
+              
+          
+            
  
 if __name__ == "__main__":
     root=Tk()
