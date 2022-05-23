@@ -27,6 +27,7 @@ class Train:
           
           faces=[]
           ids=[]
+          
           for image in path:
               img=Image.open(image).convert('L')    #gray scale image
               imageNp=np.array(img,'uint8')
@@ -34,7 +35,7 @@ class Train:
               
               faces.append(imageNp)
               ids.append(id)
-              cv2.imshow("Training", imageNp)
+              cv2.imshow("Training",imageNp)
               cv2.waitKey(1)==13
           ids=np.array(ids)
           
