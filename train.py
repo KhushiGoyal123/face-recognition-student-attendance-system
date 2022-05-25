@@ -15,7 +15,7 @@ class Train:
         self.root.geometry("500x100+0+0")
         self.root.title("Training Photos") 
         
-         #train photo button
+        #train photo button
         train_photo_btn=Button(self.root,text="Click Here",command=self.train_classifier,width=60,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
         train_photo_btn.grid(row=0,column=0)
         

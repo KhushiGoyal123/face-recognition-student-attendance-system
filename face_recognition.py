@@ -59,7 +59,7 @@ class Face_Recognition:
                 now=datetime.now()
                 d1=now.strftime("%d/%m/%Y")
                 dtString=now.strftime("%H:%M:%S")
-                f.writelines(f"\n{i},{r},{n},{d},{dtString},{d1},Preset")
+                f.writelines(f"\n{i},{r},{n},{d},{dtString},{d1},Present")
                 
         
         
@@ -69,11 +69,11 @@ class Face_Recognition:
             gray_image=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             features=classifier.detectMultiScale(gray_image,scaleFactor,minNeighbors)
             
-            coordinates=[]
+            coord=[]
             
             for (x,y,w,h) in features:
                  cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,255),3)
-                 id,predict=clf .predict(gray_image[y:y+h,x:x+w])
+                 id,predict=clf.predict(gray_image[y:y+h,x:x+w])
                  confidence=int((100*(1-predict/300)))
                  
                  conn=mysql.connector.connect(
@@ -86,23 +86,23 @@ class Face_Recognition:
                  
                  my_cursor.execute("select Name from student where Student_Id="+str(id))
                  n=my_cursor.fetchone()
-                 n=str(n)
-                #  n="+".join(n)
+                #  n=str(n)
+                 n="+".join(n)
  
                  my_cursor.execute("select Roll from student where Student_Id="+str(id))
                  r=my_cursor.fetchone()
-                 r=str(r)
-                #  r="+".join(r)
+                #  r=str(r)
+                 r="+".join(r)
  
                  my_cursor.execute("select Dep from student where Student_Id="+str(id))
                  d=my_cursor.fetchone()
-                 d=str(d)
-                #  d="+".join(d)
+                #  d=str(d)
+                 d="+".join(d)
  
                  my_cursor.execute("select Student_Id from student where Student_Id="+str(id))
                  i=my_cursor.fetchone()
-                 i=str(i)
-                #  i="+".join(i)
+                #  i=str(i)
+                 i="+".join(i)
                    
                   
                  if confidence>77:
@@ -116,11 +116,11 @@ class Face_Recognition:
                      cv2.putText(img,"Unknown Face",(x,y-55),cv2.FONT_HERSHEY_COMPLEX,0.8,(255,255,255),3)
                          
                  
-                 coordinates=[x,y,w,y] 
-            return coordinates
+                 coord=[x,y,w,y] 
+            return coord
         
         def recognize(img,clf,faceCascade):
-            coordinates=draw_boundary(img,faceCascade,1.1,10,(255,25,255),"Face",clf)
+            coord=draw_boundary(img,faceCascade,1.1,10,(255,25,255),"Face",clf)
             return img
         
         faceCascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
