@@ -47,7 +47,7 @@ class Train:
           
           clf.write("classifier.xml")
           cv2.destroyAllWindows()
-          messagebox.showinfo("Result","Thank you for adding the photo!")
+          messagebox.showinfo("Result","Thank you for adding the photo!",parent=self.root)
         
         
         

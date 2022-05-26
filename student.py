@@ -16,33 +16,6 @@ import numpy as np
 from train import Train
 
 
-def train_classifier():
-          data_dir=("data")
-          path=[os.path.join(data_dir,file) for file in os.listdir(data_dir)]
-          
-          faces=[]
-          ids=[]
-          
-          for image in path:
-              img=Image.open(image).convert('L')    #gray scale image
-              imageNp=np.array(img,'uint8')
-              id=int(os.path.split(image)[1].split('.')[1])
-              
-              faces.append(imageNp)
-              ids.append(id)
-              cv2.imshow("Training",imageNp)
-              cv2.waitKey(1)==13
-          ids=np.array(ids)
-          
-          
-          # =====================training the classifier and saving===========
-          clf=cv2.face.LBPHFaceRecognizer_create()
-        #   clf=cv2.face.EigenFaceRecognizer_create()
-          clf.train(faces,ids)
-          
-          clf.write("classifier.xml")
-          cv2.destroyAllWindows()
-          messagebox.showinfo("Result","Thank you for adding the photo!")
         
 
 class Student:
@@ -310,7 +283,7 @@ class Student:
         train_frame.place(x=5,y=395,width=585,height=30)
         
         #train photo button
-        train_photo_btn=Button(train_frame,text="Click only after photo sample is added",command=train_classifier,width=70,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
+        train_photo_btn=Button(train_frame,text="Click only after photo sample is added",command=self.train_classifier,width=70,font=("times new roman",11,"bold"),bg="green",fg="white",cursor="hand2")
         train_photo_btn.grid(row=0,column=0)
         
         
@@ -531,7 +504,7 @@ class Student:
                 messagebox.showerror("Error","Student Id is required",parent=self.root)
           else:
                 try:
-                  delete=messagebox.askyesno("Student Delete Page","Do you want to delete this student", parent=self.root)    
+                  delete=messagebox.askyesno("Student Delete Page","Do you want to delete this student",parent=self.root)    
                   if delete>0:
                         conn=mysql.connector.connect(
                         host="localhost",
@@ -545,7 +518,7 @@ class Student:
                   else:
                         if not delete:
                               return
-                  messagebox.showinfo("Delete","Successfully deleted student details") 
+                  messagebox.showinfo("Delete","Successfully deleted student details",parent=self.root) 
                   conn.commit()
                   self.fetch_data()
                   conn.close()
@@ -646,21 +619,47 @@ class Student:
                     cap.release()
                     cv2.destroyAllWindows()
                           
-                    messagebox.showinfo("Result","Photo Added")  
+                    messagebox.showinfo("Result","Photo Added",parent=self.root)  
                    
                       
                 except Exception as es:
                   messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)
                                                                                                                                                                                            
-      
+   
+   
+    def train_classifier(self):
+          data_dir=("data")
+          path=[os.path.join(data_dir,file) for file in os.listdir(data_dir)]
+          
+          faces=[]
+          ids=[]
+          
+          for image in path:
+              img=Image.open(image).convert('L')    #gray scale image
+              imageNp=np.array(img,'uint8')
+              id=int(os.path.split(image)[1].split('.')[1])
+              
+              faces.append(imageNp)
+              ids.append(id)
+              cv2.imshow("Training",imageNp)
+              cv2.waitKey(1)==13
+          ids=np.array(ids)
+          
+          
+          # =====================training the classifier and saving===========
+          clf=cv2.face.LBPHFaceRecognizer_create()
+        #   clf=cv2.face.EigenFaceRecognizer_create()
+          clf.train(faces,ids)
+          
+          clf.write("classifier.xml")
+          cv2.destroyAllWindows()
+          messagebox.showinfo("Result","Thank you for adding the photo!",parent=self.root)   
    
                     
                     
                     
                     
-                    
-                
-              
+        
           
             
  
