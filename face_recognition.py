@@ -21,7 +21,7 @@ class Face_Recognition:
         self.root.title("Face_Recognition") 
         
         # title
-        face_data_lbl=Label(self.root,text="FACE RECOGNITION",font=("times new roman",35,"bold"),bg="white", fg="red")
+        face_data_lbl=Label(self.root,text="FACE RECOGNITION ATTENDANCE SYSTEM",font=("times new roman",35,"bold"),bg="white", fg="red")
         face_data_lbl.place(x=0,y=1,width=1300,height=45)
         
         # left image

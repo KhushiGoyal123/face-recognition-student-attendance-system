@@ -46,7 +46,8 @@ class Login:
         img1=Image.open(r"college_images/LoginIconAppl.png")
         img1=img1.resize((100,100),Image.ANTIALIAS)
         self.photoimage1=ImageTk.PhotoImage(img1)
-        lblimg1=Label(image=self.photoimage1,borderwidth=0)
+        
+        lblimg1=Label(self.root,image=self.photoimage1,borderwidth=0)
         lblimg1.place(x=640,y=150,width=80,height=80)
         
         get_start=Label(frame,text="Get Started",font=("times new roman",20,"bold"),fg="black",bg="white")
