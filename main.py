@@ -55,62 +55,12 @@ class Face_Recognition_System:
         
         
         # -------------Functions buttons-----------------
-        # def student_details():
-        #     self.new_window=Toplevel(self.root)
-        #     self.app=Student(self.new_window)
-            
-        # def train_data():
-        #     self.new_window=Toplevel(self.root)
-        #     self.app=Train(self.new_window)
-       
-        # def face_data():
-        #     self.new_window=Toplevel(self.root)
-        #     self.app=Face_Recognition(self.new_window)
             
         def attendance_data():
             self.new_window=Toplevel(self.root)
             self.app=Attendance(self.new_window)
             
                
-        
-        # 1. student button
-        # img4=Image.open(r"college_images\gettyimages-1022573162.jpg")
-        # img4=img4.resize((280,260),Image.ANTIALIAS)
-        # self.photoimg4=ImageTk.PhotoImage(img4)
-        
-        
-        # b1=Button(bg_img,command=student_details,image=self.photoimg4,cursor="hand2")
-        # b1.place(x=300,y=150,width=260,height=230)
-        
-        # b1_1=Button(bg_img,text="Enter Student Details",command=student_details,cursor="hand2", font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=300,y=380,width=260,height=60)
-        
-        
-        
-        
-        # 2. detect face button
-        # img5=Image.open(r"college_images\face_detector1.jpg")
-        # img5=img5.resize((220,220),Image.ANTIALIAS)
-        # self.photoimg5=ImageTk.PhotoImage(img5)
-        
-        # b1=Button(bg_img, image=self.photoimg5,cursor="hand2",command=face_data)
-        # b1.place(x=375,y=50,width=220,height=220)
-        
-        # b1_1=Button(bg_img,text="Face Detector",cursor="hand2",command=face_data, font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=375,y=250,width=220,height=40)
-       
-       
-       
-        # 3. Attendance face button
-        # img6=Image.open(r"college_images\smart-attendance.jpg")
-        # img6=img6.resize((280,260),Image.ANTIALIAS)
-        # self.photoimg6=ImageTk.PhotoImage(img6)
-        
-        # b1=Button(bg_img, image=self.photoimg6,cursor="hand2",command=attendance_data)
-        # b1.place(x=700,y=150,width=260,height=230)
-        
-        # b1_1=Button(bg_img,text="Attendance Data",cursor="hand2",command=attendance_data,font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=700,y=380,width=260,height=60)
         
         img6=Image.open(r"college_images\smart-attendance.jpg")
         img6=img6.resize((280,260),Image.ANTIALIAS)
@@ -122,36 +72,6 @@ class Face_Recognition_System:
         b1_1=Button(bg_img,text="Attendance Data",cursor="hand2",command=attendance_data,font=("times new roman",15,"bold"),bg="darkblue", fg="white")
         b1_1.place(x=500,y=350,width=260,height=60)
        
-       
-        
-        
-        
-        # Train button
-        # img8=Image.open(r"college_images\Train.jpg")
-        # img8=img8.resize((220,220),Image.ANTIALIAS)
-        # self.photoimg8=ImageTk.PhotoImage(img8)
-        
-        # b1=Button(bg_img, image=self.photoimg8,cursor="hand2",command=train_data)
-        # b1.place(x=100,y=300,width=220,height=220)
-        
-        # b1_1=Button(bg_img,text="Train Data",cursor="hand2",command=train_data,font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=100,y=500,width=220,height=40)
-        
-        
-        
-        # # Photos button
-        # img9=Image.open(r"college_images\images.jpg")
-        # img9=img9.resize((220,220),Image.ANTIALIAS)
-        # self.photoimg9=ImageTk.PhotoImage(img9)
-        
-        # b1=Button(bg_img, image=self.photoimg9,cursor="hand2")
-        # b1.place(x=375,y=300,width=220,height=220)
-        
-        # b1_1=Button(bg_img,text="Photos",cursor="hand2", font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=375,y=500,width=220,height=40)
-        
-    
-
             
        
             

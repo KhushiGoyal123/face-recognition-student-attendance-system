@@ -1,14 +1,7 @@
-from email import message
-from msilib.schema import Class
-# from multiprocessing import parent_process
 from tkinter import*
 from tkinter import ttk
-from tkinter import font
-from tkinter import scrolledtext
-from turtle import bgcolor, update, width
 from PIL import Image, ImageTk
 from tkinter import messagebox
-from colorama import Cursor
 import mysql.connector
 import cv2
 import os

@@ -8,7 +8,7 @@ class Panel_Selection:
     def __init__(self,root): 
         self.root=root
         self.root.geometry("1530x790+0+0")
-        self.root.title("Selection Panel")
+        self.root.title("WELCOME TO FACE RECOGNITION ATTENDANCE SYSTEM")
         
         
         

@@ -59,18 +59,14 @@ class Face_Recognition_System_Student:
             self.new_window=Toplevel(self.root)
             self.app=Student(self.new_window)
             
-        # def train_data():
-        #     self.new_window=Toplevel(self.root)
-        #     self.app=Train(self.new_window)
+
+
        
         def face_data():
             self.new_window=Toplevel(self.root)
             self.app=Face_Recognition(self.new_window)
             
-        # def attendance_data():
-        #     self.new_window=Toplevel(self.root)
-        #     self.app=Attendance(self.new_window)
-            
+
                
         
         
@@ -102,34 +98,7 @@ class Face_Recognition_System_Student:
         b1_1.place(x=700,y=380,width=260,height=60)
        
        
-       
-        # # 3. Attendance face button
-        # img6=Image.open(r"college_images\smart-attendance.jpg")
-        # img6=img6.resize((220,220),Image.ANTIALIAS)
-        # self.photoimg6=ImageTk.PhotoImage(img6)
-        
-        # b1=Button(bg_img, image=self.photoimg6,cursor="hand2",command=attendance_data)
-        # b1.place(x=650,y=50,width=220,height=220)
-        
-        # b1_1=Button(bg_img,text="Attendance",cursor="hand2",command=attendance_data,font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=650,y=250,width=220,height=40)
-       
-       
-        
-        
-        
-        # Train button
-        # img8=Image.open(r"college_images\Train.jpg")
-        # img8=img8.resize((220,220),Image.ANTIALIAS)
-        # self.photoimg8=ImageTk.PhotoImage(img8)
-        
-        # b1=Button(bg_img, image=self.photoimg8,cursor="hand2",command=train_data)
-        # b1.place(x=100,y=300,width=220,height=220)
-        
-        # b1_1=Button(bg_img,text="Train Data",cursor="hand2",command=train_data,font=("times new roman",15,"bold"),bg="darkblue", fg="white")
-        # b1_1.place(x=100,y=500,width=220,height=40)
-        
-        
+      
             
        
             

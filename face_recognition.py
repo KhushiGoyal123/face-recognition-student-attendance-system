@@ -1,11 +1,7 @@
-from email.headerregistry import ContentTransferEncodingHeader
 from tkinter import*
 from tkinter import ttk
-from unicodedata import name
 from PIL import Image, ImageTk
-# from student import Student
 import os
-from click import command
 import mysql.connector
 import cv2
 from tkinter import messagebox

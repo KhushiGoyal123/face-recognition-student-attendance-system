@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 import os
-from certifi import contents
 import cv2
 import mysql.connector
 import csv

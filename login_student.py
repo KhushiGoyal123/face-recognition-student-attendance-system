@@ -11,11 +11,6 @@ from main_student import Face_Recognition_System_Student
 from register import Register
 
 
-# def main():
-#     main_win=Tk()
-#     app=Login(main_win)
-#     main_win.mainloop()
-
 class Login_student:
     def __init__(self,root): 
         self.root=root
@@ -112,7 +107,7 @@ class Login_student:
             if row!=None:
                 messagebox.showerror("Error","Invalid username and password",parent=self.root)
             else:
-                open_main=messagebox.askyesno("Ask","Access only admin",parent=self.root)
+                open_main=messagebox.askyesno("Ask","Access only student",parent=self.root)
                 if open_main>0:
                     self.new_window=Toplevel(self.root)
                     self.app=Face_Recognition_System_Student(self.new_window)
