@@ -32,10 +32,12 @@
 - After cloning this project, follow the below steps:
 - Run `panel_selection.py` 
 - Select your role: Admin or Student
+<img src="ProjectSS/panel_selection_page.bmp">
 - Credentials : 
       Student - khushi123@gmail.com and password - 1234
       Admin - kapilsingh@gmail.com and password - kapil123
-
+- To mark attendance, go to `Student panel` and Mark your attendance then "Click Here" and your attendance will be recorded
+<img src="ProjectSS/attendance_page.png">
 
 <b>Optional -</b> <i>You can also create a new account either by clicking the "create new user" in `login_student.py` or `register.py`</i>
 
